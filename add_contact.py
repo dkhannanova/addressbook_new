@@ -13,7 +13,7 @@ class AddContact(unittest.TestCase):
     def test_add_contact(self):
         wd = self.wd
         self.open_home_page(wd, home_page="http://localhost/addressbook/")
-        self.login(wd)
+        self.login(wd, username="admin", password="secret")
         self.create_new_contact(wd, Contact(firstname="1", middlename="middlename", lastname="lastname", nickname="nickname", photo="C:\\Users\hannanovadm\Pictures\9908383.pdf", title="title",
                                             company="company", address="address", home="home", mobile="mobile", work="work", fax="fax", email="email",
                                             homepage="homepage", bday="1", bmonth="August", byear="1985", address2="address2", phone="phone2", notes="notes"))
@@ -84,31 +84,23 @@ class AddContact(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def login(self, wd):
+    def login(self, wd, username, password):
         # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
+    def password(self):
+        return "secret"
 
     def open_home_page(self, wd, home_page):
         wd.get(home_page)
 
-    def is_element_present(self, how, what):
-        try: self.wd.find_element(by=how, value=what)
-        except NoSuchElementException as e: return False
-        return True
     
-    def is_alert_present(self):
-        try: self.wd.switch_to_alert()
-        except NoAlertPresentException as e: return False
-        return True
-    
-
     def tearDown(self):
         self.wd.quit()
 
