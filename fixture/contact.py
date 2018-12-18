@@ -1,4 +1,6 @@
 from selenium.webdriver.support.select import Select
+
+
 class ContactHelper:
     def __init__(self, app):
         self.app = app
@@ -64,3 +66,10 @@ class ContactHelper:
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+
+    def delete_contact(self):
+            # delete contact
+            wd = self.app.wd
+            wd.find_element_by_name("selected[]").click()
+            wd.find_element_by_xpath("//input[@value='Delete']").click()
+            wd.switch_to_alert().accept()
