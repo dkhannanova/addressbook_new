@@ -9,16 +9,16 @@ class GroupHelper:
 
     def fill_group(self, group):
         wd = self.app.wd
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.group_name)
-        wd.find_element_by_xpath("//div[@id='content']/form").click()
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.group_header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.group_footer)
+        self.change_field("group_name", group.group_name)
+        self.change_field("group_header", group.group_header)
+        self.change_field("group_footer", group.group_footer)
+
+    def change_field(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
     def create(self, group):
         wd = self.app.wd
@@ -34,17 +34,20 @@ class GroupHelper:
     def delete_first_group(self):
         wd = self.app.wd
         self.open_groups_page()
-        #select first group
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         #delete group
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
+    def select_first_group(self):
+        # select first group
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
     def modify_group(self, group):
         wd = self.app.wd
         self.open_groups_page()
-        # select first group
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         # modify group
         wd.find_element_by_name("edit").click()
         self.fill_group(group)
