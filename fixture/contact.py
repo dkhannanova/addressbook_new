@@ -23,20 +23,13 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
 
-    def change_field_file(self, field_name, file):
-        wd = self.app.wd
-        if file is not None:
-            wd.find_element_by_name(field_name).click()
-            wd.find_element_by_name(field_name).clear()
-            wd.find_element_by_name(field_name).send_keys(file)
-
     def fill_contact(self, contact):
         wd = self.app.wd
         self.change_field("firstname", contact.firstname)
         self.change_field("middlename", contact.middlename)
         self.change_field("lastname", contact.lastname)
         self.change_field("nickname", contact.nickname)
-        self.change_field_file("photo", contact.photo)
+        self.change_field("photo", contact.photo)
         self.change_field("title", contact.title)
         self.change_field("company", contact.company)
         self.change_field("address", contact.address)
