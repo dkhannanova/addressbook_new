@@ -33,5 +33,7 @@ class SessionHelper:
 
     def logout(self):
         # logout
+        global session
         wd = self.app.wd
-        wd.find_element_by_link_text("Logout").click()
+        if not self.session is None:
+            wd.find_element_by_link_text("Logout").click()

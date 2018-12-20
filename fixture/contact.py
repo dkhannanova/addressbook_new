@@ -7,6 +7,8 @@ class ContactHelper:
 
     def return_to_contacts_page(self):
         wd = self.app.wd
+        if wd.current_url.endswith("/") and len(wd.find_elements_by_name("Last name"))>0:
+            return
         wd.find_element_by_link_text("home").click()
 
     def change_field(self, field_name, text):
@@ -53,6 +55,7 @@ class ContactHelper:
     def create_new_contact(self, contact):
         # create contact
         wd = self.app.wd
+        self.return_to_contacts_page()
         wd.find_element_by_link_text("add new").click()
         self.fill_contact(contact)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
@@ -68,6 +71,7 @@ class ContactHelper:
 
     def modify_contact(self, contact):
             wd = self.app.wd
+            self.return_to_contacts_page()
             wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
             self.fill_contact(contact)
             wd.find_element_by_name("update").click()
