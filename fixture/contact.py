@@ -7,7 +7,7 @@ class ContactHelper:
 
     def return_to_contacts_page(self):
         wd = self.app.wd
-        if wd.current_url.endswith("/") and len(wd.find_elements_by_name("Last name"))>0:
+        if wd.current_url.endswith("/") and len(wd.find_elements_by_name("to_group")) > 0:
             return
         wd.find_element_by_link_text("home").click()
 
@@ -67,7 +67,7 @@ class ContactHelper:
             wd.find_element_by_name("selected[]").click()
             wd.find_element_by_xpath("//input[@value='Delete']").click()
             wd.switch_to_alert().accept()
-            wd.find_element_by_id("logo").click()
+            self.return_to_contacts_page()
 
     def modify_contact(self, contact):
             wd = self.app.wd
