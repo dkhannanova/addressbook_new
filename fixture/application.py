@@ -19,6 +19,16 @@ class Application:
         except:
             return False
 
+    def is_session_valid(self):
+        try:
+
+            webdriver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='home'])[1]/preceding::a[3]")
+            return True
+        except:
+                return False
+
+
+
     def open_home_page(self):
         wd = self.wd
         # open home page
