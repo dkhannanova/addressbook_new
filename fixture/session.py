@@ -1,5 +1,3 @@
-from fixture.application import Application
-
 
 class SessionHelper:
 
@@ -11,7 +9,7 @@ class SessionHelper:
     def login(self, username, password):
         global session
         wd = self.app.wd
-        if session is None:
+        if self.session is None:
             wd = self.app.wd
             self.app.open_home_page()
             wd.find_element_by_name("user").clear()

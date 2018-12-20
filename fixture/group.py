@@ -54,6 +54,7 @@ class GroupHelper:
         # submit group data
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        wd.find_element_by_id("logo").click()
 
     def open_groups_page(self):
         wd = self.app.wd

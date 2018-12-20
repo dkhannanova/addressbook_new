@@ -60,9 +60,11 @@ class ContactHelper:
     def delete_contact(self):
             # delete contact
             wd = self.app.wd
+            self.return_to_contacts_page()
             wd.find_element_by_name("selected[]").click()
             wd.find_element_by_xpath("//input[@value='Delete']").click()
             wd.switch_to_alert().accept()
+            wd.find_element_by_id("logo").click()
 
     def modify_contact(self, contact):
             wd = self.app.wd
