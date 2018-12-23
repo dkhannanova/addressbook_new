@@ -11,6 +11,11 @@ class ContactHelper:
             return
         wd.find_element_by_link_text("home").click()
 
+    def select_first_contact(self):
+        # select first contact
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
     def change_field(self, field_name, text):
         wd = self.app.wd
         if text is not None:
@@ -72,6 +77,7 @@ class ContactHelper:
     def modify_contact(self, contact):
             wd = self.app.wd
             self.return_to_contacts_page()
+            self.select_first_contact()
             wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
             self.fill_contact(contact)
             wd.find_element_by_name("update").click()

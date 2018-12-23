@@ -3,7 +3,7 @@ from model.group import Group
 def test_modify_group(app):
     old_group = app.group.get_group_list()
     group = Group(group_name="name1", group_header="header1", group_footer="footer1")
-    group1 = Group(group_name="modifname3")
+    group1 = Group(group_name="m1")
     group1.id = old_group[0].id
     group1.group_header = old_group[0].group_header
     group1.group_footer = old_group[0].group_footer
