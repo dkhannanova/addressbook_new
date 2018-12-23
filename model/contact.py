@@ -23,18 +23,18 @@ class Contact:
         self.address2 = address2
         self.phone = phone
         self.notes = notes
-        self.id = conid
+        self.conid = conid
 
 
     def __repr__(self):
-        return "%s:%s" % (self.id, self.group_name)
+        return "%s" % (self.conid) #self.lastname)
 
     def __eq__(self, other):
-        return (self.id is None or other.id is None or self.id == other.id) and self.group_name == other.group_name
+        return (self.conid is None or other.conid is None or self.conid == other.conid) #and self.lastname == other.lastname
 
     def id_or_max(self):
-        if self.id:
-            return int(self.id)
+        if self.conid:
+            return int(self.conid)
         else:
             return maxsize
 
