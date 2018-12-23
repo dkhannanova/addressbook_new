@@ -27,10 +27,10 @@ class Contact:
 
 
     def __repr__(self):
-        return "%s" % (self.conid) #self.lastname)
+        return "%s:%s:%s" % (self.conid, self.lastname, self.firstname)
 
     def __eq__(self, other):
-        return (self.conid is None or other.conid is None or self.conid == other.conid) #and self.lastname == other.lastname
+        return (self.conid is None or other.conid is None or self.conid == other.conid) and self.lastname == other.lastname and self.firstname == other.firstname
 
     def id_or_max(self):
         if self.conid:
