@@ -2,7 +2,8 @@ from sys import maxsize
 class Contact:
     def __init__(self, firstname=None, middlename=None, lastname=None,
                  nickname=None, photo=None, title=None, company=None, address=None,
-                 home=None, mobile=None, work=None, fax=None, email=None, homepage=None, bday=None, bmonth=None, byear=None, address2=None, phone=None, notes=None, conid=None):
+                 home=None, mobile=None, work=None, fax=None, email=None, homepage=None, bday=None, bmonth=None, byear=None, address2=None, phone=None, notes=None, conid=None,
+                 allphones_from_home_page=None, email2=None, email3=None):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname
@@ -16,6 +17,8 @@ class Contact:
         self.work = work
         self.fax = fax
         self.email = email
+        self.email2 = email2
+        self.email3 = email3
         self.homepage = homepage
         self.bday = bday
         self.bmonth = bmonth
@@ -24,10 +27,11 @@ class Contact:
         self.phone = phone
         self.notes = notes
         self.conid = conid
+        self.allphones_from_home_page = allphones_from_home_page
 
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.conid, self.lastname, self.firstname)
+        return "%s:%s:%s" % (self.conid, self.lastname, self.firstname, self.allphones_from_home_page, self.email, self.address)
 
     def __eq__(self, other):
         return (self.conid is None or other.conid is None or self.conid == other.conid) and self.lastname == other.lastname and self.firstname == other.firstname
