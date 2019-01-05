@@ -31,7 +31,7 @@ class Contact:
 
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.conid, self.lastname, self.firstname, self.allphones_from_home_page, self.email, self.address)
+        return "%s:%s:%s:%s:%s:%s" % (self.conid, self.lastname, self.firstname, self.allphones_from_home_page, self.email, self.address)
 
     def __eq__(self, other):
         return (self.conid is None or other.conid is None or self.conid == other.conid) and self.lastname == other.lastname and self.firstname == other.firstname
