@@ -11,7 +11,7 @@ def random_string(prefix, maxlen):
 
 testdata = [Contact(firstname="", middlename="", lastname="", nickname="", photo=None, title="",
                                             company="", address="", home="", mobile="", work="", fax="", email="",
-                                            homepage="", bday="", bmonth="", byear="", address2="", phone="", notes="")] + [
+                                            homepage="", bday=None, bmonth=None, byear=None, address2="", phone="", notes="")] + [
     Contact(firstname=random_string("first",10), middlename=random_string("middle",20), lastname=random_string("last", 13),
           nickname=random_string("nick",12), photo="C:\\Users\hannanovadm\Pictures\9908383.pdf", title=random_string("title",12),
           company=random_string("company",12), address=random_string("address",12), home=random_string("home",12), mobile=random_string("mobile",12),
