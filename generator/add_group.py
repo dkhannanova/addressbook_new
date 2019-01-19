@@ -2,7 +2,7 @@ from model.group import Group
 import string
 import random
 import os.path
-import json
+import jsonpickle
 #библиотека для чтения опций командной строки
 import getopt
 #библиотека для использования опций командной строки
@@ -42,5 +42,6 @@ path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 
 #открываем файл для записи по пути path для записи в него сгенерированных данных
 with open(path, "w") as out:
+    jsonpickle.set_encoder_options("json", indent=2)
 # параметр indent для переноса объектов списка в отдельные строки
-    out.write(json.dumps(testdata, default=lambda x: x.__dict__), indent=2)
+    out.write(jsonpickle.encode(testdata))
