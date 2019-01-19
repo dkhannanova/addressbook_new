@@ -13,16 +13,18 @@ try:
     opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of groups", "file"])
 except getopt.GetoptError as err:
     getopt.usage()
-    sys.xit()
+    sys.exit(2)
 
+#указывыем значения параметров: количество генерируемых циклов,путь к файлу, в который будут записаны данные
 n = 5
 f = "data/groups.json"
 
+#  кортеж из названий переменных и значения, для вврдимых опций проверяются n и f для использования нижепо коду
 for o, a in opts:
     if a == "-n":
         n = int(a)
     elif o == "-f":
-        f = o
+        f = a
 
 
 
@@ -32,7 +34,7 @@ def random_string(prefix, maxlen):
 
 testdata = [Group(group_name="", group_header="", group_footer="")] + [
     Group(group_name=random_string("name",10),group_header=random_string("header",20), group_footer=random_string("footer", 13))
-    for i in range (n)]
+    for i in range(n)]
 
 
 #склейка родительской директории текущего файла и названия файла, в который будут записаны тестовые данные, вложенная функция определяет абсолютный путь к текущему файлу
