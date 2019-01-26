@@ -76,7 +76,7 @@ class ContactHelper:
             self.select_contact(index)
             wd.find_element_by_xpath("//input[@value='Delete']").click()
             wd.switch_to_alert().accept()
-            #self.return_to_contacts_page()
+            #self.return_to_personal_page()
             self.contacts_cash = None
 
 

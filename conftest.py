@@ -4,9 +4,18 @@ import json
 import jsonpickle
 import os.path
 import importlib
+from fixture.db import DbFixture
 
 fixture = None
 target = None
+
+def load_config(file):
+    global target
+    if target is None:
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
+        with open(path) as config:
+            target = json.load(config)
+    return target
 
 
 @pytest.fixture
@@ -14,13 +23,10 @@ def app(request):
     global fixture
     global target
     browser = request.config.getoption("--browser")
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--target"))
-    if target is None:
-        with open(path) as config:
-            target = json.load(config)
+    web_config=load_config(request.config.getoption("--target"))['web']
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=target['base_url'])
-        fixture.session.login(username=target['username'], password=target['password'])
+        fixture = Application(browser=browser, base_url=web_config['base_url'])
+        fixture.session.login(username=web_config['username'], password=web_config['password'])
     return fixture
 
 @pytest.fixture(scope="session", autouse=True)
@@ -30,6 +36,18 @@ def stop(request):
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture
+
+@pytest.fixture(scope="session")
+def db(request):
+    db_config = load_config(request.config.getoption("--target"))['db']
+    #инициализируем собственный класс DbFixture
+    dbfixture=DbFixture(host=db_config['host'], name=db_config['name'], user=db_config['user'], password=db_config['password'])
+
+    def fin():
+        dbfixture.destroy()
+    request.addfinalizer(fin)
+    return dbfixture
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
