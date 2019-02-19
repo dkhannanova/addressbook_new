@@ -88,6 +88,21 @@ class GroupHelper:
                 self.group_cash.append(Group(group_name=text, group_id=id))
         return list(self.group_cash)
 
+    def delete_group_by_id(self, id):
+        wd = self.app.wd
+        self.open_groups_page()
+        self.select_group_by_id(id)
+        # delete group
+        wd.find_element_by_name("delete").click()
+        self.return_to_groups_page()
+        self.group_cash = None
+
+    def select_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+
+
 
 
 
