@@ -40,7 +40,7 @@ def stop(request):
 @pytest.fixture(scope="session")
 def db(request):
     db_config = load_config(request.config.getoption("--target"))['db']
-    #инициализируем собственный класс DbFixture
+    #init our class DbFixture
     dbfixture=DbFixture(host=db_config['host'], name=db_config['name'], user=db_config['user'], password=db_config['password'])
 
     def fin():
@@ -73,3 +73,4 @@ def load_from_json(file):
 @pytest.fixture
 def check_ui(request):
     request.config.getoption("--check_ui")
+    return fixture
